@@ -21,9 +21,9 @@
   when: git_user_email_result.stdout != "{{git_user_email}}"
 
 - name: install homebrew via the curl oneliner
-  shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  shell: git clone https://github.com/mxcl/homebrew.git {{ lookup('env','HOME') }}/.homebrew
   args:
-    creates: /usr/local/bin/brew
+    creates: "{{ lookup('env','HOME') }}/.homebrew/bin/brew"
 
 - name: update and upgrade homebrew
   homebrew: update_homebrew=yes upgrade_all=yes
